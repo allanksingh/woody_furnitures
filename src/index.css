@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.logo {
+  font-family: "Pacifico", cursive;
+  font-size:larger;
+}
+
+.logo:hover{
+  cursor: pointer;
+  color: rgb(219, 178, 73);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.material-symbols-outlined:hover{
+  cursor: pointer;
+  color: rgb(219, 178, 73);
+}
+
+nav {
+  background-color: rgb(124, 83, 29);
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navicons {
+  display: flex;
+  gap: 20px;
+}
+
+.productcard{
+  width: 300px;
+  margin: 30px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: white;
+}
+.productcard img{
+  width: 100%;
+}
+.Productname{
+  font-weight: 700;
+  font-size: larger;
+  margin: 10px 0;
+}
+.productcard button{
+  background-color:rgb(124, 83, 29) ;
+  border-style: none;
+color: white;
+padding: 8px 12px;
+border-radius: 4px;
+}
+.productcard button:hover{
+  background-color: rgb(45, 33, 4);
+}
+.Productdescription{
+  margin: 10px 0;
+}
+.Details{
+  padding: 20px 5px;
+  border-top: 1px solid black;
+  margin-top: 20px;
+}
+.Productcardfooter{
+  display: flex;
+  justify-content: space-between;
+  
+}
+footer{
+  padding: 30px;
+  background-color: rgb(124, 83, 29);
+  color: white;
+  text-align: center;
+}
+a{
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+}
+a:hover{
+  color: coral;
+}
+.Footernav{
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+.Productsection{
+  background-image: url('./Images/background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.Aboutuspara{
+padding: 10px;
+background-image: url('./Images/background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+ font-size: larger;
+min-height: 100vh;
+ color: white;
+}
+.Aboutuspara p{
+margin: 30px 15%;
+line-height: 30px;
+}
+
+.indexpara{
+  color: white;
+  font-weight: 800;
+  font-size: 75px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url('./Images/background.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.hidepopup{
+  display: none;
+  transition: ease; 
+  transition-property: all;
+  transition-duration: 3s;
+}
+
+.showpopup{
+  position: fixed;
+  display: block;
+  bottom: 50px;
+  right: 43%;
+  width: fit-content;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  box-shadow: 5px 5px 10px black;
+  
+}
+
+.quantity{
+  padding: 15px 0px;
+}
+
+.quantity span{
+  padding: 5px;
+}
+
+iframe{
+  margin: 0 15%;
+  width: 70%;
+
+}
+
