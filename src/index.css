@@ -40,8 +40,15 @@ nav {
 .navicons {
   display: flex;
   gap: 20px;
+
 }
 
+.navicons .icons:hover{
+  
+    cursor: pointer;
+    color: rgb(219, 178, 73);
+  
+}
 .productcard{
   width: 300px;
   margin: 30px;
@@ -174,7 +181,16 @@ iframe{
   transform: scale(1.07);
 }
 
-.navicons:hover{
-  cursor: pointer;
-  color: rgb(219, 178, 73);
+
+
+.shoppingcartpopup{
+  background-color: white;
+  padding: 30px;
+  margin: 30px ;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  z-index: 20;
+  
 }

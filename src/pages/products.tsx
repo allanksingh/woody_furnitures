@@ -7,6 +7,7 @@ import stool from "../Images/stool2.0.jpg";
 import { Dispatch, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaUser } from "react-icons/fa6";
+import ShoppingCartPopup from "../components/shoppingcartpopup";
 
 export default function ProductPage() {
   const [chairprice, changechairprice] = useState(60);
@@ -21,6 +22,7 @@ export default function ProductPage() {
   const [stoolqty, changestoolqty] = useState(1);
   const [bookshelfprice, changebookshelfprice] = useState(250);
   const [bookshelfqty, changebookshelfqty] = useState(1);
+  const [showshoppingcart, setshowshoppingcart] = useState(false)
 
   const [shoppingcartlist, updateshoppingcartlist] = useState<{productName: string, qty: number, price: number}[]>([]);
 
@@ -41,6 +43,7 @@ export default function ProductPage() {
       changeprice(price * newqty);
     }
   }
+
 
   function addtocart(productName: string, qty: number, price: number) {
     const index = shoppingcartlist.findIndex(item => item.productName === productName);
@@ -63,11 +66,15 @@ export default function ProductPage() {
       <nav>
         <p className="logo">Woody Furnitures</p>
         <div className="navicons">
-          <FaShoppingCart />
-          <FaUser />
+          <FaShoppingCart className="icons" onClick={ ()=>{setshowshoppingcart(!showshoppingcart)}} />
+          <FaUser className="icons" />
         </div>
       </nav>
       <section className="Productsection">
+        {
+          showshoppingcart&&  <ShoppingCartPopup list={shoppingcartlist}/>
+        }
+     
         <div className="productcard">
           <img src={chair} alt="" />
           <div className="Details">
@@ -112,7 +119,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("chair", chairqty, chairprice);
+                addtocart("Wooden Chair", chairqty, chairprice);
               }}
               id="chairbutton"
             >
@@ -165,7 +172,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("bookshelf", bookshelfqty, bookshelfprice);
+                addtocart("Wooden Bookshelf", bookshelfqty, bookshelfprice);
               }}
               id="bookshelfbutton"
             >
@@ -218,7 +225,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("cupboard", cupboardqty, cupboardprice);
+                addtocart("Wooden Cupboard", cupboardqty, cupboardprice);
               }}
               id="cupboardbutton"
             >
@@ -271,7 +278,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("table", tableqty, tableprice);
+                addtocart("Wooden Table", tableqty, tableprice);
               }}
               id="tablebutton"
             >
@@ -323,7 +330,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("bed", bedqty, bedprice);
+                addtocart("Wooden Bed", bedqty, bedprice);
               }}
               id="bedbutton"
             >
@@ -376,7 +383,7 @@ export default function ProductPage() {
             </div>
             <button
               onClick={() => {
-                addtocart("stool", stoolqty, stoolprice);
+                addtocart("Wooden Stool", stoolqty, stoolprice);
               }}
               id="stoolbutton"
             >
