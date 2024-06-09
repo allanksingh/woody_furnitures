@@ -22,7 +22,7 @@ export default function ProductPage() {
   const [bookshelfprice, changebookshelfprice] = useState(250);
   const [bookshelfqty, changebookshelfqty] = useState(1);
 
-  const [shoppingcartlist, updateshoppingcartlist] = useState<any[]>([]);
+  const [shoppingcartlist, updateshoppingcartlist] = useState<{productName: string, qty: number, price: number}[]>([]);
 
   function changeqtyandprice(
     price: number,
@@ -43,13 +43,17 @@ export default function ProductPage() {
   }
 
   function addtocart(productName: string, qty: number, price: number) {
-    const updatedList = shoppingcartlist.map((item) => {
-      // if (item.productName === productName) {
-      //   return { ...item, qty, price };
-      // }
-      return { productName, qty, price };
-    });
-    updateshoppingcartlist(updatedList);
+    const index = shoppingcartlist.findIndex(item => item.productName === productName);
+
+    if (index !== -1) {
+      const updatedItem = { ...shoppingcartlist[index], qty, price };
+      const updatedList = [...shoppingcartlist.slice(0, index), updatedItem, ...shoppingcartlist.slice(index + 1)];
+      updateshoppingcartlist(updatedList);
+    } else {
+      const newItem = { productName, qty, price };
+      const updatedList = [...shoppingcartlist, newItem];
+      updateshoppingcartlist(updatedList);
+    }
   }
   
 
