@@ -48,6 +48,7 @@ nav {
   border: 1px solid #ddd;
   padding: 10px;
   background-color: white;
+  transition: all 0.2s ease-in-out;
 }
 .productcard img{
   width: 100%;
@@ -77,7 +78,7 @@ border-radius: 4px;
 }
 .Productcardfooter{
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   
 }
 footer{
@@ -169,3 +170,11 @@ iframe{
 
 }
 
+.productcard:hover{
+  transform: scale(1.07);
+}
+
+.navicons:hover{
+  cursor: pointer;
+  color: rgb(219, 178, 73);
+}

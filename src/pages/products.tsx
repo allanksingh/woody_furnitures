@@ -5,6 +5,8 @@ import bookshelf from "../Images/Bookshelf.jpg";
 import table from "../Images/Table.jfif";
 import stool from "../Images/stool2.0.jpg";
 import { Dispatch, useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import { FaUser } from "react-icons/fa6";
 
 export default function ProductPage() {
   const [chairprice, changechairprice] = useState(60);
@@ -15,10 +17,12 @@ export default function ProductPage() {
   const [bedqty, changebedqty] = useState(1);
   const [cupboardprice, changecupboardprice] = useState(150);
   const [cupboardqty, changecupboardqty] = useState(1);
-  const [stoolprice, changestoolprice] = useState(250);
+  const [stoolprice, changestoolprice] = useState(50);
   const [stoolqty, changestoolqty] = useState(1);
-  const [bookshelfprice, changebookshelfprice] = useState(80);
+  const [bookshelfprice, changebookshelfprice] = useState(250);
   const [bookshelfqty, changebookshelfqty] = useState(1);
+
+  const [shoppingcartlist, updateshoppingcartlist] = useState<any[]>([]);
 
   function changeqtyandprice(
     price: number,
@@ -27,28 +31,36 @@ export default function ProductPage() {
     changeqty: Dispatch<React.SetStateAction<number>>,
     method: "plus" | "minus"
   ) {
-    if(method === "plus") {
-      changeqty((prevQuantity) => prevQuantity + 1)
-      changeprice(prv => prv * qty);
-    }
-    else{
-      changeqty(qty - 1)
-      changeprice(prv => prv * (qty - 1))
+    if (method === "plus") {
+      var newqty = qty + 1;
+      changeqty(newqty);
+      changeprice(price * newqty);
+    } else {
+      var newqty = Math.max(qty - 1, 1);
+      changeqty(newqty);
+      changeprice(price * newqty);
     }
   }
 
+  function addtocart(productName: string, qty: number, price: number) {
+    const updatedList = shoppingcartlist.map((item) => {
+      // if (item.productName === productName) {
+      //   return { ...item, qty, price };
+      // }
+      return { productName, qty, price };
+    });
+    updateshoppingcartlist(updatedList);
+  }
+  
+
+  console.log(shoppingcartlist);
   return (
     <div>
       <nav>
         <p className="logo">Woody Furnitures</p>
         <div className="navicons">
-          <span title="Shopping Cart" className="material-symbols-outlined">
-            shopping_cart
-          </span>
-          <span title="Account" className="material-symbols-outlined">
-            {" "}
-            person{" "}
-          </span>
+          <FaShoppingCart />
+          <FaUser />
         </div>
       </nav>
       <section className="Productsection">
@@ -61,19 +73,47 @@ export default function ProductPage() {
               sturdiness for timeless comfort and style in any setting."
             </div>
             <div className="Productcardfooter">
-              <button id="chairbutton">Add to cart</button>
-              <h2 id="chairprice">{chairprice}</h2>
+              <h2 id="chairprice">${chairprice}</h2>
             </div>
             <div className="quantity">
-              <button onClick={() => changeqtyandprice(60,chairqty,changechairprice,changechairqty,"minus")} id="chairminus">-</button>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    60,
+                    chairqty,
+                    changechairprice,
+                    changechairqty,
+                    "minus"
+                  )
+                }
+                id="chairminus"
+              >
+                -
+              </button>
               <span id="chairquantity">{chairqty}</span>
               <button
-                onClick={() => changeqtyandprice(60,chairqty,changechairprice,changechairqty,"plus")}
+                onClick={() =>
+                  changeqtyandprice(
+                    60,
+                    chairqty,
+                    changechairprice,
+                    changechairqty,
+                    "plus"
+                  )
+                }
                 id="chairplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("chair", chairqty, chairprice);
+              }}
+              id="chairbutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <div className="productcard">
@@ -86,22 +126,47 @@ export default function ProductPage() {
               elegantly."
             </div>
             <div className="Productcardfooter">
-              <button id="bookshelfbutton">Add to cart</button>
-              <h2 id="bookshelfprice"></h2>
+              <h2 id="bookshelfprice">${bookshelfprice}</h2>
             </div>
             <div className="quantity">
-              <button id="bookshelfminus">-</button>
-              <span id="bookshelfquantity"></span>
               <button
-                onClick={() => {
-                  changebookshelfqty(bookshelfqty + 1);
-                  changebookshelfprice(bookshelfprice * bookshelfqty);
-                }}
+                onClick={() =>
+                  changeqtyandprice(
+                    250,
+                    bookshelfqty,
+                    changebookshelfprice,
+                    changebookshelfqty,
+                    "minus"
+                  )
+                }
+                id="bookshelfminus"
+              >
+                -
+              </button>
+              <span id="bookshelfquantity">{bookshelfqty}</span>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    250,
+                    bookshelfqty,
+                    changebookshelfprice,
+                    changebookshelfqty,
+                    "plus"
+                  )
+                }
                 id="bookshelfplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("bookshelf", bookshelfqty, bookshelfprice);
+              }}
+              id="bookshelfbutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <div className="productcard">
@@ -114,22 +179,47 @@ export default function ProductPage() {
               organized in style."
             </div>
             <div className="Productcardfooter">
-              <button id="cupboardbutton">Add to cart</button>
-              <h2 id="cupboardprice"></h2>
+              <h2 id="cupboardprice">${cupboardprice}</h2>
             </div>
             <div className="quantity">
-              <button id="cupboardminus">-</button>
-              <span id="cupboardquantity"></span>
               <button
-                onClick={() => {
-                  changecupboardqty(cupboardqty + 1);
-                  changecupboardprice(cupboardprice * cupboardqty);
-                }}
+                onClick={() =>
+                  changeqtyandprice(
+                    150,
+                    cupboardqty,
+                    changecupboardprice,
+                    changecupboardqty,
+                    "minus"
+                  )
+                }
+                id="cupboardminus"
+              >
+                -
+              </button>
+              <span id="cupboardquantity">{cupboardqty}</span>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    150,
+                    cupboardqty,
+                    changecupboardprice,
+                    changecupboardqty,
+                    "plus"
+                  )
+                }
                 id="cupboardplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("cupboard", cupboardqty, cupboardprice);
+              }}
+              id="cupboardbutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <div className="productcard">
@@ -142,22 +232,47 @@ export default function ProductPage() {
               everyday use."
             </div>
             <div className="Productcardfooter">
-              <button id="tablebutton">Add to cart</button>
-              <h2 id="tableprice"></h2>
+              <h2 id="tableprice">${tableprice}</h2>
             </div>
             <div className="quantity">
-              <button id="tableminus">-</button>
-              <span id="tablequantity"></span>
               <button
-                onClick={() => {
-                  changetableqty(tableqty + 1);
-                  changetableprice(tableprice * tableqty);
-                }}
+                onClick={() =>
+                  changeqtyandprice(
+                    120,
+                    tableqty,
+                    changetableprice,
+                    changetableqty,
+                    "minus"
+                  )
+                }
+                id="tableminus"
+              >
+                -
+              </button>
+              <span id="tablequantity">{tableqty}</span>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    120,
+                    tableqty,
+                    changetableprice,
+                    changetableqty,
+                    "plus"
+                  )
+                }
                 id="tableplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("table", tableqty, tableprice);
+              }}
+              id="tablebutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <div className="productcard">
@@ -169,22 +284,47 @@ export default function ProductPage() {
               restful nights and lasting beauty in your bedroom sanctuary."
             </div>
             <div className="Productcardfooter">
-              <button id="bedbutton">Add to cart</button>
-              <h2 id="bedprice"></h2>
+              <h2 id="bedprice">${bedprice}</h2>
             </div>
             <div className="quantity">
-              <button id="bedminus">-</button>
-              <span id="bedquantity"></span>
               <button
-                onClick={() => {
-                  changebedqty(bedqty + 1);
-                  changebedprice(bedprice * bedqty);
-                }}
+                onClick={() =>
+                  changeqtyandprice(
+                    400,
+                    bedqty,
+                    changebedprice,
+                    changebedqty,
+                    "minus"
+                  )
+                }
+                id="bedminus"
+              >
+                -
+              </button>
+              <span id="bedquantity">{bedqty}</span>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    400,
+                    bedqty,
+                    changebedprice,
+                    changebedqty,
+                    "plus"
+                  )
+                }
                 id="bedplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("bed", bedqty, bedprice);
+              }}
+              id="bedbutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
         <div className="productcard">
@@ -197,22 +337,47 @@ export default function ProductPage() {
               neutral finish complements any decor"
             </div>
             <div className="Productcardfooter">
-              <button id="stoolbutton">Add to cart</button>
-              <h2 id="stoolprice"></h2>
+              <h2 id="stoolprice">${stoolprice}</h2>
             </div>
             <div className="quantity">
-              <button id="stooldminus">-</button>
-              <span id="stoolquantity"></span>
               <button
-                onClick={() => {
-                  changestoolqty(stoolqty + 1);
-                  changestoolprice(stoolprice * stoolqty);
-                }}
+                onClick={() =>
+                  changeqtyandprice(
+                    50,
+                    stoolqty,
+                    changestoolprice,
+                    changestoolqty,
+                    "minus"
+                  )
+                }
+                id="stooldminus"
+              >
+                -
+              </button>
+              <span id="stoolquantity">{stoolqty}</span>
+              <button
+                onClick={() =>
+                  changeqtyandprice(
+                    50,
+                    stoolqty,
+                    changestoolprice,
+                    changestoolqty,
+                    "plus"
+                  )
+                }
                 id="stoolplus"
               >
                 +
               </button>
             </div>
+            <button
+              onClick={() => {
+                addtocart("stool", stoolqty, stoolprice);
+              }}
+              id="stoolbutton"
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </section>

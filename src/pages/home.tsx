@@ -1,16 +1,12 @@
+import { FaShoppingCart, FaUser } from "react-icons/fa";
+
 export default function HomePage() {
   return (
     <div>
       <nav>
         <p className="logo">Woody Furnitures</p>
         <div className="navicons">
-          <span title="Shopping Cart" className="material-symbols-outlined">
-            shopping_cart
-          </span>
-          <span title="Account" className="material-symbols-outlined">
-            {" "}
-            person{" "}
-          </span>
+       
         </div>
       </nav>
       <section className="indexpara">Welcome to Woody Furnitures</section>
